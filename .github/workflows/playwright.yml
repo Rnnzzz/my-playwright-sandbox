@@ -29,7 +29,7 @@ jobs:
 
     - name: Install Playwright Browsers (Cache Miss)
       if: steps.playwright-cache.outputs.cache-hit != 'true'
-      run: npx playwright install --with-deps
+      run: npx playwright install chromium --with-deps
 
     - name: Install Playwright System Dependencies Only (Cache Hit)
       if: steps.playwright-cache.outputs.cache-hit == 'true'
