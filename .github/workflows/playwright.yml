@@ -36,16 +36,26 @@ jobs:
       run: npx playwright install-deps
 
     - name: Run Playwright tests (API)
-      run: npm run test:api -- --reporter=blob --output=blob-report/api
+      env:
+        PLAYWRIGHT_BLOB_OUTPUT_DIR: blob-report-api
+      run: npm run test:api -- --reporter=blob
       continue-on-error: true
 
     - name: Run Playwright tests (WEB)
-      run: npm run test:web -- --reporter=blob --output=blob-report/web
+      env:
+        PLAYWRIGHT_BLOB_OUTPUT_DIR: blob-report-web
+      run: npm run test:web -- --reporter=blob
       continue-on-error: true
 
     - name: Merge Result to generate HTML Report
       if: always()
-      run: npx playwright merge-reports --reporter=html ./blob-report
+      run: |
+        mkdir -p all-blobs
+        
+        [ -d blob-report-api ] && cp blob-report-api/*.zip all-blobs/ || true
+        [ -d blob-report-web ] && cp blob-report-web/*.zip all-blobs/ || true
+        
+        npx playwright merge-reports --reporter=html ./all-blobs
 
     - name: Generate Report Artifact
       if: always()
