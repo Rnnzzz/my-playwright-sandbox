@@ -32,7 +32,7 @@ export const TestData = {
   },
   nonExistentPlace: {
     from: 'Sydney',
-    to: 'Zzzzznotarealcityxyz',
+    to: 'notarealcityxyz',
   },
   emptyDestination: {
     from: 'Sydney',

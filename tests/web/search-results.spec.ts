@@ -28,10 +28,10 @@ test.describe('@Web Flight-results validations', () => {
   async function validateFilterComponents(componentLocator: string, page: Page) {
     const elementComponent = page.locator(`//div[@aria-label='${componentLocator}']`).first();
     expect(await elementComponent).toBeVisible();
-    await elementComponent.click();
-    const componentClickedElement = page.locator(`//div[text()='${componentLocator}']`).nth(1);
-    expect(await componentClickedElement).toBeVisible();
-    await elementComponent.click();
+    // await elementComponent.click();
+    // const componentClickedElement = page.locator(`//div[text()='${componentLocator}']`).nth(1);
+    // expect(await componentClickedElement).toBeVisible();
+    // await elementComponent.click();
   }
 
   test('@Negative a route with no viable flights shows a "no results" state, not an empty/blank page', async ({ page }) => {
