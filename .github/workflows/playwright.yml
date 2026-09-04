@@ -35,8 +35,11 @@ jobs:
       if: steps.playwright-cache.outputs.cache-hit == 'true'
       run: npx playwright install-deps
 
-    - name: Run Playwright tests
-      run: npx playwright test
+    - name: Run Playwright tests (API)
+      run: npm run test:api
+
+    - name: Run Playwright tests (WEB)
+      run: npm run test:web
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
