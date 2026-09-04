@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { BookingPayload, CreateBookingResponse } from '../../src/utils/booking.model';
 
-test.describe('@api Booking Service Testing', () => {
+test.describe('Booking Service Testing', () => {
     let authToken: string;
     let dynamicBookingId: number;
     const BASE_URL = 'https://restful-booker.herokuapp.com'
