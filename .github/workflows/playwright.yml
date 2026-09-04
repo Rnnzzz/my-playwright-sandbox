@@ -36,21 +36,21 @@ jobs:
       run: npx playwright install-deps
 
     - name: Run Playwright tests (API)
-      run: npm run test:api -- --reporter=blob
+      run: npm run test:api -- --reporter=blob --output=blob-report/api
       continue-on-error: true
 
     - name: Run Playwright tests (WEB)
-      run: npm run test:web -- --reporter=blob
+      run: npm run test:web -- --reporter=blob --output=blob-report/web
       continue-on-error: true
 
-    - name: Merge Reports into Single HTML
+    - name: Merge Result to generate HTML Report
       if: always()
       run: npx playwright merge-reports --reporter=html ./blob-report
 
-    - name: Upload Single HTML Report Artifact
+    - name: Generate Report Artifact
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: playwright-smoke-test-result
         path: playwright-report/
-        retention-days: 30
+        retention-days: 3
