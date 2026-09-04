@@ -39,13 +39,22 @@ jobs:
       run: npm run test:api
       continue-on-error: true
 
+    - name: Upload API Test Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-api-report
+        path: playwright-report/
+        retention-days: 3
+
     - name: Run Playwright tests (WEB)
       run: npm run test:web
       continue-on-error: true
-      
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
+
+    - name: Upload WEB Test Report
+      if: always()
+      uses: actions/upload-artifact@v4
       with:
-        name: playwright-report
+        name: playwright-web-report
         path: playwright-report/
-        retention-days: 30
+        retention-days: 3
